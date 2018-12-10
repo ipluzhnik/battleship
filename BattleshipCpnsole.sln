@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleshipCpnsole", "BattleshipCpnsole\BattleshipCpnsole.csproj", "{3AFB63E1-D9D6-423A-9327-39E58AD02D48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E13E1035-08B7-4B3F-8BFF-DFE343BC28AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{E2B8D9F8-3974-41E6-B804-5F563DB32A6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{F4A128DE-65D5-408A-B6E4-8ABDA5749DDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleshipStateTracker", "Models\BattleshipStateTracker\BattleshipStateTracker.csproj", "{99F80295-807C-4528-B3CB-91BFC6B9E1B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleshipStateTrackerTest", "Test\BattleshipStateTrackerTest\BattleshipStateTrackerTest.csproj", "{AF0ABC27-0D75-4A1B-86F2-C5BCB5711698}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AFB63E1-D9D6-423A-9327-39E58AD02D48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AFB63E1-D9D6-423A-9327-39E58AD02D48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AFB63E1-D9D6-423A-9327-39E58AD02D48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AFB63E1-D9D6-423A-9327-39E58AD02D48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F80295-807C-4528-B3CB-91BFC6B9E1B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F80295-807C-4528-B3CB-91BFC6B9E1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F80295-807C-4528-B3CB-91BFC6B9E1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F80295-807C-4528-B3CB-91BFC6B9E1B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0ABC27-0D75-4A1B-86F2-C5BCB5711698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0ABC27-0D75-4A1B-86F2-C5BCB5711698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0ABC27-0D75-4A1B-86F2-C5BCB5711698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0ABC27-0D75-4A1B-86F2-C5BCB5711698}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3AFB63E1-D9D6-423A-9327-39E58AD02D48} = {E13E1035-08B7-4B3F-8BFF-DFE343BC28AA}
+		{99F80295-807C-4528-B3CB-91BFC6B9E1B9} = {E2B8D9F8-3974-41E6-B804-5F563DB32A6A}
+		{AF0ABC27-0D75-4A1B-86F2-C5BCB5711698} = {F4A128DE-65D5-408A-B6E4-8ABDA5749DDC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14A88355-05FC-47E7-928D-F6E949E08511}
+	EndGlobalSection
+EndGlobal
