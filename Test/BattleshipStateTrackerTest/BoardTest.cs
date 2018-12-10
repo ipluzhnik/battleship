@@ -8,8 +8,8 @@ namespace BattleshipStateTrackerTest
     public class BoardTest
     {
 	   private Game _game;
-	   private string _firstPlayer = "bob";
-	   private string _secondPlayer = "suzie";
+	   private readonly string _firstPlayer = "bob";
+	   private readonly string _secondPlayer = "suzie";
 
 	   /// <summary>
 	   /// this test confirms that we can either create manually or automatically ships
