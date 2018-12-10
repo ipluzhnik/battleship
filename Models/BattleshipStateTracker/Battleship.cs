@@ -7,7 +7,7 @@ namespace BattleshipStateTracker
 {
     public class Battleship
     {
-        public List<Square> Squares { get; private set; }
+	   public List<Square> Squares { get; } = new List<Square>();
         public bool Destroyed { get; private set; }
 
         public void AddSquares(IEnumerable<Square> squares)
@@ -16,6 +16,7 @@ namespace BattleshipStateTracker
             {
                 item.IsEmpty = false;
             }
+		  Squares.AddRange(squares);
         }
         public HitResult TryToHit(int x, int y)
         {

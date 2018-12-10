@@ -8,37 +8,142 @@ namespace BattleshipStateTracker
     {
         public int Height { get; } = 10;//Background #2: Each have a 10x10 board
         public int Width { get; } = 10;//DITTO
-        public List<Square> Squares{get; private set;}
-        public List<Battleship> Battleships { get; private set;}
-        public string Player { get; private set; }
-        public static Board CreateBoard(string playerName)
+	   internal List<Square> Squares { get; } = new List<Square>();
+
+	   public List<Battleship> Battleships { get; } = new List<Battleship>();
+
+	   public string Player { get; private set; }
+
+	   public static Board CreateBoard(string playerName)
         {
             var board = new Board { Player = playerName };
             for (int x = 0; x < board.Height; x++)
             {
                 for (int y = 0; y < board.Width; y++)
                 {
-                    board.Squares.Add(new Square(x, y));
+                    board.Squares.Add(new Square(x, y) { IsEmpty = true });
                 }
             }
             return board;
         }
-        public Battleship CreateBattleship(bool random, Alingment alingment=Alingment.Horizontal, int size =-1, int x = -1, int y = -1)
+
+        /// <summary>
+        /// Creates a new battleship either manually or authomatically finding ther largest empty slot
+        /// </summary>
+        /// <param name="random"></param>
+        /// <param name="alingment"></param>
+        /// <param name="size"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+	   public Battleship CreateBattleship(bool random, Alingment alingment=Alingment.Horizontal, int size =-1, int x = -1, int y = -1)
+        {
+          Battleship bs ;
+		  if (random)//if random find the largest Battleship that we can allocate to the board
+		  {
+			 if (alingment==Alingment.Horizontal)
+			 {
+				bs=FindLargestHorizontalShip();
+			 }
+			 else
+			 {
+				bs=FindLargestVerticalShip();
+			 }
+		  }
+		  else
+		  {
+                bs = BuildBattleship(alingment,size,x,y);
+		  }
+		  if (bs!=null)
+		  {
+			 Battleships.Add(bs);
+		  }
+            return bs;
+        }
+
+        private Battleship BuildBattleship(Alingment alingment, int size, int x, int y)
         {
             var bs = new Battleship();
-            if (random)//if random find the largest Battleship that we can allocate to the board
+            if (Squares.Where(s => s.X == x && s.Y == y).FirstOrDefault() == null
+                || Squares.Where(s => (s.X == x + size - 1 && s.Y == y && alingment == Alingment.Horizontal) ||
+                (s.Y == y + size - 1 && s.X == x && alingment == Alingment.Vertical)).FirstOrDefault() == null)
             {
-                var bsHorizontal = FindLargestHorizontalShip();
-                var bsVertical = FindLargestVerticalShip();
-                return bsHorizontal;
+                bs = null;
+            }
+            else
+            {
+                if (alingment == Alingment.Horizontal)
+                {
+                    if (Squares.Any(s => (s.Y == y && (s.X >= x && s.X <= x + size - 1)) && !s.IsEmpty))
+                    {
+                        bs = null;
+                    }
+                    else
+                    {
+                        bs.AddSquares(Squares.Where(s => (s.Y == y && (s.X >= x && s.X <= x + size))));
+                    }
+                }
+                else
+                {
+                    if (Squares.Any(s => (s.X == x && (s.Y >= y && s.Y <= y + size - 1)) && !s.IsEmpty))
+                    {
+                        bs = null;
+                    }
+                    else
+                    {
+                        bs.AddSquares(Squares.Where(s => (s.X == x && (s.Y >= y && s.Y <= y + size - 1))));
+                    }
+                }
             }
             return bs;
         }
 
-        private Battleship FindLargestVerticalShip()
+        public HitResult TryHit(int x, int y)
+	   {
+		  Battleship destroyed = null;
+		  var result = HitResult.Missed;
+		  foreach (var bs in Battleships)
+		  {
+			 result = bs.TryToHit(x, y);
+			 if (result==HitResult.Destroyed)
+			 {
+				destroyed = bs;
+			 }
+			 if (result !=HitResult.Missed)
+			 {
+				break;
+			 }
+		  }
+		  if (destroyed!=null)
+		  {
+			 Battleships.Remove(destroyed);
+		  }
+		  return result;
+	   }
+	   private Battleship FindLargestVerticalShip()
         {
-            return null;
-        }
+		  int size = 0;
+		  Battleship battleship = null;
+		  for (int x = 0; x < Width; x++)
+		  {
+			 for (int y = 0; y < Height; y++)
+			 {
+				if (Squares.Where(s => s.X == x && s.Y == y).First().IsEmpty)
+				{
+				    for (int i = y + 1; i < Height; i++)
+				    {
+					   if (Squares.Where(s => s.Y == i && s.X == x).First().IsEmpty && size <= i - y)
+					   {
+						  battleship = new Battleship();
+						  battleship.AddSquares(Squares.Where(s => s.X == x && s.Y>=y && s.Y <= i));
+						  size = battleship.Squares.Count;
+					   }
+				    }
+				}
+			 }
+		  }
+		  return battleship;
+	   }
 
         private Battleship FindLargestHorizontalShip()
         {
@@ -60,6 +165,7 @@ namespace BattleshipStateTracker
                             {
                                 battleship = new Battleship();
                                 battleship.AddSquares(Squares.Where(s =>s.Y==y && s.X<=i));
+						  size = battleship.Squares.Count;
                             }
                         }
                     }
