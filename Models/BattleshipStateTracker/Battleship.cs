@@ -17,14 +17,19 @@ namespace BattleshipStateTracker
                 item.IsEmpty = false;
             }
         }
-        public bool TryToHit(int x, int y)
+        public HitResult TryToHit(int x, int y)
         {
             var square = Squares.Where(s => s.X == x && s.Y == y).FirstOrDefault();
-            if (square!=null)
+            if (square!=null && !square.IsHit)
             {
                 square.IsHit = true;
+                if (Squares.All(s => s.IsHit))
+                    return HitResult.Destroyed;
+                else
+                    return HitResult.Wounded;
             }
-            return Squares.All(s => s.IsHit);
+            return HitResult.Missed;
+            
         }
     }
 }
