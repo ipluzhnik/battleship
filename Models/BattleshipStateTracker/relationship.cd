@@ -3,11 +3,11 @@
   <Class Name="BattleshipStateTracker.Game">
     <Position X="8.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAQAAAAAAAAQAAAAgAAAAQAgAgCAAAEA=</HashCode>
+      <HashCode>AAACAAAAAAAAAQAAAAAAAAAAAAAgAAAAQAgAgCAAAAA=</HashCode>
       <FileName>Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Field Name="Boards" />
+      <Property Name="Players" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="BattleshipStateTracker.Battleship">
@@ -24,8 +24,8 @@
       <FileName>Board.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Battleships" />
       <Property Name="Squares" />
+      <Property Name="Battleships" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="BattleshipStateTracker.Square">
@@ -34,6 +34,17 @@
       <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAYAA=</HashCode>
       <FileName>Square.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="BattleshipStateTracker.Player">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAACAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FiringBoard" />
+      <Property Name="OwnBoard" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
